@@ -1,0 +1,17 @@
+
+<div md-dialog-content>Add a comment before declining this {{ commentModel }}.</div>
+<div class="cx-margin-base">
+    <div md-dialog-actions>
+        <div class="cx-w100 cx-text-align-center">
+            <form (ngSubmit)="onSubmit(commentForm)" [formGroup]="commentForm" novalidate>
+                <md-input-container class="cx-w100">
+                    <textarea mdInput placeholder="Comment" id="note" class="cx-textarea cx-w100" formControlName="note" name="note"></textarea>
+                </md-input-container>
+                <div class="cx-w100 cx-text-align-right">
+                    <button md-button type="button" class="cx-button-cancel cx-margin-base-right" md-dialog-close="false">Cancel</button>
+                    <button md-button class="cx-button-action" [disabled]="commentForm.invalid">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

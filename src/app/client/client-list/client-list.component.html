@@ -1,0 +1,23 @@
+<div *ngIf="userHasClients" class="cx-w100 cx-text-align-center">
+    <md-button-toggle (click)="onToggle()" id="cx-button-toggle">
+        <span *ngIf="showAll;else all_clients">Show My Clients</span>
+    </md-button-toggle>
+</div>
+<ul class="cx-admin-menu cx-margin-none-top" role="menu">
+    <span *ngIf="!showAll"> 
+        <li role="menuitem" *ngFor="let client of clientsSubscribed">
+            <a routerLink="{{client.id}}" class="cx-link-admin" routerLinkActive="cx-link-active" (click)="showClientAddForm=false">
+                {{ client.name }} 
+            </a>
+        </li>
+    </span>
+    <span *ngIf="showAll"> 
+        <li role="menuitem" *ngFor="let client of clientsAll">
+        <a routerLink="{{client.id}}" class="cx-link-admin" routerLinkActive="cx-link-active" (click)="showClientAddForm=false">
+            {{ client.name }} 
+        </a>
+    </li>
+    </span>
+</ul>
+
+<ng-template #all_clients>Show All Clients</ng-template>

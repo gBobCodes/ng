@@ -1,0 +1,61 @@
+@import '../../../assets/css/modules/colors';
+@import '../../../assets/css/modules/fonts';
+@import '../../../assets/css/modules/margins';
+
+.cx-result-button-export {
+    float: right;
+    margin-right: 30px;
+    position: relative;
+    top: 4px;
+}
+
+.cx-result-card {
+    cursor: pointer;
+    float: left;
+    margin: 1%;
+    width: 360px;
+    min-height: 275px;
+}
+
+.cx-result-export-item {
+    color: black;
+    padding: 5px 10px;
+}
+
+.cx-result-filter-container {
+    padding: 1% 30px;
+    width: 20%;
+}
+
+.cx-result-label {
+    color: $font-color-label;
+    font-size: $font-size-small;
+    padding: $input-padding-small;
+    white-space: nowrap;
+}
+
+.cx-result-value {
+    font-size: $font-size-small;
+    font-weight: $font-weight-base;
+    padding: $input-padding-small;
+    white-space: nowrap;
+}
+
+.mat-card {
+}
+
+.mat-card-content {
+    padding: 0 5px;
+}
+
+.mat-card-header {
+    font-size: $font-size-large;
+    font-style: normal;
+}
+
+.mat-card-title {
+    font-size: $font-size-large;
+    font-weight: $font-weight-base;
+    margin-bottom: $margin-xlarge;
+
+}

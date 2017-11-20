@@ -1,0 +1,38 @@
+<div class="cx-margin-base-top">
+    <div class="cx-label-section cx-comments-label-align">Comments</div>
+    <div class="cx-display-inline-block"><button *ngIf="!addComment" md-mini-fab (click)="toggleAdd()"><md-icon class="cx-fab-mini">add</md-icon></button></div>
+    <div>
+        <div *ngIf="addComment" id="comment" class="cx-margin-base-left">
+            <form (ngSubmit)="onSubmit(commentForm)" [formGroup]="commentForm" novalidate>
+                <md-input-container class="cx-w100">
+                    <textarea mdInput placeholder="Comment" id="note" class="cx-textarea cx-w100" formControlName="note" name="note"></textarea>
+                </md-input-container>
+                <div class="cx-w100 cx-text-align-right">
+                    <button md-button type="button" class="cx-button-cancel cx-margin-base-right" (click)="toggleAdd()">Cancel</button><button md-button class="cx-button-action" [disabled]="commentForm.invalid">Save</button>
+                </div>
+            </form>
+        </div>
+        <table class="cx-w100 cx-margin-base-left">
+            <tr *ngFor="let comment of (comments | async)" class="cx-list-row">
+                <table class="cx-w100 cx-margin-base-bottom">
+                    <tr>
+                        <td class="cx-label cx-label-large">{{ comment.author.first_name }} {{ comment.author.last_name }} {{ comment.created | date: dateFormat }}<md-icon *ngIf="currentUser.id == comment.author.id && editId!=comment.id" (click)="toggleEdit(comment.id)" class="cx-icon-edit">edit</md-icon></td>
+                    </tr>
+                    <tr >
+                        <td *ngIf="editId!=comment.id" style="white-space: pre">{{ comment.note }}</td>
+                        <td *ngIf="editId==comment.id" class="cx-padding-base-right">
+                            <form (ngSubmit)="onSubmit(commentForm)" [formGroup]="commentForm" novalidate>
+                                <md-input-container class="cx-w100 cx-margin-small-top">
+                                    <textarea mdInput placeholder="Comment" id="note" class="cx-textarea cx-w100" formControlName="note" name="note"[value]="comment.note">{{ comment.note }}</textarea>
+                                </md-input-container>
+                                <div class="cx-w100 cx-text-align-right">
+                                    <button md-button type="button" class="cx-button-cancel cx-margin-base-right" (click)="toggleEditCancel()">Cancel</button><button md-button class="cx-button-action" [disabled]="commentForm.invalid">Save</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+        </table>
+    </div>
+</div>

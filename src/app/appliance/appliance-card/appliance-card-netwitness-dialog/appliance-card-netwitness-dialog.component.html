@@ -1,0 +1,24 @@
+
+<form class="cx-appliance-card-netwitness-form">
+    <div md-dialog-title>Export To Netwitness</div>
+    <div md-dialog-content>
+        <div>
+            <md-input-container class="cx-w100">
+                <input mdInput placeholder="Key" id="key" [(ngModel)]="data.nwKey" name="nwKey" required>
+                <md-error>This field is required</md-error>
+            </md-input-container>
+        </div>
+        <div>
+            <md-input-container class="cx-w100">
+                <input mdInput placeholder="Index" id="index" [(ngModel)]="data.nwIndex" name="nwIndex" type="number" required>
+                <md-error>This field is required</md-error>
+            </md-input-container>
+        </div>
+    </div>
+    <div md-dialog-actions class="cx-margin-base">
+        <div class="cx-w100 cx-text-align-center">
+            <button md-button class="cx-button-cancel" md-dialog-close="false" tabindex="-1">Cancel</button>
+            <button md-button class="cx-button-action" [md-dialog-close]="{'nwKey':data.nwKey,'nwIndex':data.nwIndex}" tabindex="-1">Export</button>
+        </div>
+    </div>
+</form>

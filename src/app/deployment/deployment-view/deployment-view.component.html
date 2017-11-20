@@ -1,0 +1,8 @@
+<div class="container-fluid cx-sub-header" >
+    <div class="cx-sub-header-title">View Deployment</div>
+    <div class="cx-sub-header-right"></div>
+</div>
+<cnx-deployment-detail *ngIf="deployment" [content]="content" [deployment]="deployment"></cnx-deployment-detail>
+<div class="cx-margin-large-top">
+    <cnx-content-detail *ngIf="content" [content]="content"></cnx-content-detail>
+</div>

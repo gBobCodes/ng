@@ -1,0 +1,23 @@
+<table class="cx-admin-table">
+    <tr>
+        <td class="cx-main-admin-menu-container">
+            <cnx-client-list></cnx-client-list>
+        </td>
+        <td class="cx-admin-content-container">
+            <div *ngIf="showClientAddForm">
+                <div class="cx-admin-sub-header">
+                    <span class="cx-admin-sub-header-title">Add Client</span>
+                </div>
+                <cnx-client-edit [(showClientModifyForm)]="showClientAddForm"></cnx-client-edit>
+            </div>
+            <div class="container-fluid cx-sub-header" >
+                <div class="cx-sub-header-title cx-client-view-title">Client</div>
+                <div class="cx-sub-header-right cx-client-view-right">
+                    <span *ngIf="userCanAdd && !showClientAddForm"><button class="cx-button-action cx-margin-0" (click)="showClientAddForm=true">Add Client</button></span>
+                </div>
+            </div>
+            <router-outlet name="subscriptionoutlet"></router-outlet>
+            <router-outlet></router-outlet>
+        </td>
+    </tr>
+</table>

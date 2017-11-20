@@ -1,0 +1,32 @@
+<table class="cx-w100 cx-clickable-card" >
+    <tr class="cx-appliance-status">
+        <td colspan="2" class="cx-w100 cx-dash-stage-card-title cx-color-primary cx-appliance-name">{{ appliance.name }}</td>
+    </tr>
+    <tr *ngFor="let workflow of appliance.workflows">
+        <td>
+            <table>
+                <tr>
+                    <td class="cx-appliance-workflow-status">{{ workflow.status }}</td>
+                    <td class="cx-appliance-workflow-row">
+                        <table class="cx-appliance-margin-right-large">
+                            <tr>
+                                <td class="cx-w100 cx-text-align-right cx-appliance-deployment-count">{{ workflow.deployments.length  }}&nbsp;</td>
+                                <td><md-icon  *ngIf="workflow.status=='Proposed'" mdTooltip="Export" mdTooltipPosition="above" (click)="onExport()" class="cx-icon-edit">file_download</md-icon></td>
+                                <td><md-icon  *ngIf="workflow.status=='Exported'" mdTooltip="Deploy" mdTooltipPosition="above" class="cx-icon-edit" (click)="onDeployed()">send</md-icon></td>
+                                <td><md-icon  *ngIf="workflow.status=='Recall Needed'" mdTooltip="Recall" mdTooltipPosition="above" class="cx-icon-edit" (click)="onRecalled()">replay</md-icon></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr *ngFor="let deployment of workflow.deployments" (click)="onView(deployment.id)" class="cx-appliance-cursor">
+                    <td class="cx-appliance-deployment-title">
+                        {{ deployment.rule.title }}
+                        <br>
+                        <md-icon *ngIf="deployment.rule.client_customization" mdTooltip="Client Customization Needed" mdTooltipPosition="above" class="cx-color-warn">warning</md-icon>
+                        {{ deployment.last_updated | date: dateFormat}}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

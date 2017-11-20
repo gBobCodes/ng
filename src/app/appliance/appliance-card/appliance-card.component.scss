@@ -1,0 +1,49 @@
+@import '../../../assets/css/modules/colors';
+@import '../../../assets/css/modules/fonts';
+
+.cx-appliance-cursor {
+    cursor: pointer;
+}
+
+.cx-appliance-deployment-count {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cx-appliance-deployment-title {
+    padding-bottom:5%;
+    padding-left: 15%;
+}
+
+.cx-appliance-margin-right-large {
+    margin-right: 10%;
+}
+
+.cx-appliance-name {
+    padding: 5%;
+}
+
+.cx-appliance-status {
+     border-top: 1px solid $color-primary-border;
+     border-bottom: 1px solid $color-primary-border;
+}
+
+.cx-appliance-stage-card {
+    border:1px solid $color-primary-border;
+    border-left: 3px solid $color-primary;
+    font-size: $font-size-small;
+    border-top: 0;
+}
+
+.cx-appliance-workflow-row {
+    padding-right: 10px;
+        padding-top: 1%;
+
+}
+
+.cx-appliance-workflow-status {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 10%;
+    width: 100%;
+}

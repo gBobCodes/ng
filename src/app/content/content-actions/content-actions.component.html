@@ -1,0 +1,11 @@
+<div class="cx-nowrap cx-w100">
+    <button class="cx-button-action" *ngIf="content.canUserModify()" (click)="onEdit()">
+        Edit
+    </button>
+    <button class="cx-button-action" *ngIf="content.canUserPort()" (click)="onPort()">
+        Port
+    </button>
+    <button class="cx-button-action" *ngIf="content.canUserRevise()" (click)="onRevise()">
+        Revise
+    </button>
+</div>

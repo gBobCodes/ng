@@ -1,0 +1,73 @@
+@import '../../assets/css/modules/margins';
+
+ul.cx-content {
+    /* creating columns in content add form */
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 100%;
+}
+
+ul.cx-content li {
+    /* cells for content add form */
+    float: left;
+    margin-left: 0;
+    margin-right: 1%;
+    width: 24%;
+}
+
+.cx-content-alert {
+    /* the alert class for the alerservice display */
+    width: 25%;
+    text-align: center;
+    display: inline-block;
+}
+
+.cx-content-label-dependencies {
+    /* creating label dependencies group */
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.cx-content-submit {
+    /* div holding the submit button */
+    display: inline-flex;
+    float: right;
+}
+
+.cx-content-title-view {
+    margin-right: $margin-base-px;
+}
+
+.cx-content-td-tall {
+    vertical-align: top;
+    padding-top: $margin-base;
+}
+
+.cx-clickable-card {
+    cursor: pointer;
+}
+
+.cx-mt15 {
+    /* needed to provide gap for content textarea */
+    margin-top: 15px !important;
+}
+
+.cx-top-10 {
+    /* needed to position error message on textarea */
+    position: relative;
+    top: -10px;
+}
+
+.cx-center {
+    /* used to center the alert after submission  */
+    text-align: center;
+}
+
+// Overrides
+
+
+.dropdown-menu {
+    /* override dropdown menu bootstrap style */
+    width: 100%;
+}

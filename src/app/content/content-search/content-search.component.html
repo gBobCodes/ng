@@ -1,0 +1,80 @@
+<table class="cx-admin-table cx-w100">
+    <tr>
+        <td class="cx-main-admin-menu-container cx-result-filter-container">
+            <cnx-filters></cnx-filters>
+        </td>
+        <td class="cx-admin-content-container">
+            <div class="cx-admin-sub-header">
+                <div id="admin-title" class="cx-admin-sub-header-title cx-float-left">
+                    Search
+                </div>
+                <!-- uncommented but saved for future use
+                <div class="cx-result-button-export">
+                    <div class="btn-group cx-margin-0" dropdown placement="bottom right">
+                        <button dropdownToggle type="button" class="cx-button-action dropdown-toggle">
+                            Export
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li role="menuitem" class="cx-result-export-item">JSON</li>
+                            <li role="menuitem" class="cx-result-export-item">CSV</li>
+                            <li role="menuitem" class="cx-result-export-item">PDF</li>
+                            <li role="menuitem" class="cx-result-export-item">TEXT</li>
+                        </ul>
+                    </div>
+                </div>
+                -->
+            </div>
+            <div *ngIf="filterResults?.length;else no_results" class="cx-admin-sub-content-container">
+                <div *ngFor="let rule of filterResults" class="cx-result-card">
+                    <md-card (click)="onView(rule.id)">
+                        <md-card-header>
+                            <md-card-title>{{ rule.title }}</md-card-title>
+                        </md-card-header>
+                        <md-card-content>
+                            <table>
+                                <tr>
+                                    <td class="cx-result-label">Status</td>
+                                    <td class="cx-result-value">{{ rule.status?.label }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Platform</td>
+                                    <td class="cx-result-value">{{ rule.platform?.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Author</td>
+                                    <td class="cx-result-value">{{ rule.author?.first_name }} {{ rule.author?.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Created</td>
+                                    <td class="cx-result-value">{{ rule.created | date: dateFormat }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Last Updated</td>
+                                    <td class="cx-result-value">{{ rule.last_updated | date: dateFormat }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Appliances</td>
+                                    <td class="cx-result-value">{{ rule.appliances?.length }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Deployments</td>
+                                    <td class="cx-result-value">{{ rule.deployments?.length }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-result-label">Comments</td>
+                                    <td class="cx-result-value">{{ rule.comments?.length }}</td>
+                                </tr>
+                            </table>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<ng-template #no_results>
+    <div *ngIf="filterParams" class="cx-admin-sub-content-container" #no_results>
+        No content found. Adjust your search parameters.
+    </div>
+</ng-template>

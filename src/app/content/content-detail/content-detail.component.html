@@ -1,0 +1,182 @@
+<div *ngIf="content" class="container-fluid cx-container-form">
+    <div class="row">
+        <alert></alert>
+        <table class="cx-w100">
+            <tr>
+                <td colspan="2" class="cx-w100">
+                    <table class="cx-w100">
+                        <tr>
+                            <td class="cx-w100"><cnx-content-workflow [(content)]="content"></cnx-content-workflow></td>
+                            <td><cnx-content-actions [content]="content"></cnx-content-actions></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="cx-w100">
+                    <div class="cx-content-title-view cx-margin-base-top">
+                        <strong>{{ content.title }}</strong>
+                        <p class="cx-textarea">{{ content.description }}</p>
+                    </div>
+                </td>
+                <td rowspan="3" class="cx-content-td-tall">
+                    <md-card class="cx-nowrap">
+                        <md-card-content>
+                            <table>
+                                <tr>
+                                    <td class="cx-label">Author</td>
+                                    <td class="cx-input-padding">{{ content.author.first_name }} {{ content.author.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-label">Created</td>
+                                    <td class="cx-input-padding">{{ content.created | date: dateFormat}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-label">Updated</td>
+                                    <td class="cx-input-padding">{{ content.last_updated | date: dateFormat}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-label">Version</td>
+                                    <td class="cx-input-padding">{{ content.version }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-label">Comments</td>
+                                    <td class="cx-input-padding">{{ commentCount }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="cx-label">Deployments</td>
+                                    <td class="cx-input-padding">{{ content.deployments.length }}</td>
+                                </tr>
+                            </table>
+                        </md-card-content>
+                    </md-card>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul class="cx-content cx-margin-base-top">
+                        <li>
+                            <div class="cx-label">Platform</div>
+                            <div>{{ content.platform.name }}</div>
+                        </li>
+                        <li>
+                            <div class="cx-label">Threat Category</div>
+                            <div>
+                                <div *ngFor="let category of content.threat_categories">{{ category.name }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cx-label">Threat Actor</div>
+                            <div>{{ content.threat_actor.name }}</div>
+                        </li>
+                        <li *ngIf="content.threat_actor_name">
+                            <div class="cx-label">Threat Actor Name</div>
+                            <div>{{ content.threat_actor_name }}</div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul class="cx-content cx-margin-base-top">
+                        <li>
+                            <div class="cx-label">Attack Phase</div>
+                            <div>
+                                <div *ngFor="let phase of content.attack_phases">{{ phase.name }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cx-label">Protocol</div>
+                            <div>{{ content.protocol.name }}</div>
+                        </li>
+                        <li>
+                            <div class="cx-label" *ngIf="content.malware_family_name">Malware Family</div>
+                            <div>{{ content.malware_family_name }}</div>
+                        </li>
+                        <li>
+                            <div class="cx-label" *ngIf="content.malware_family_variant">Malware Family Variant</div>
+                            <div>{{ content.malware_family_variant }}</div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="cx-label-section">Dependencies</td>
+            </tr>
+            <tr>
+                <td>
+                    <ul class="cx-content cx-margin-base-top">
+                        <li>
+                            <div class="cx-label" *ngIf="content.logs.length">Logs</div>
+                            <div>
+                                <div *ngFor="let log of content.logs">{{ log.name }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cx-label" *ngIf="content.packets.length" >Packets</div>
+                            <div>
+                                <div *ngFor="let packet of content.packets">{{ packet.name }}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cx-label" *ngIf="content.custom_inputs.length">Custom</div>
+                            <div>
+                                <div *ngFor="let custom of content.custom_inputs">{{ custom.name }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul class="cx-content cx-margin-base-top">
+                        <li>
+                            <div class="cx-label">Expiration Days</div>
+                            <div>{{ content.expiration_days }}</div>
+                        </li>
+                        <li *ngIf="content.cve">
+                            <div class="cx-label">CVE</div>
+                            <div>{{ content.cve }}</div>
+                        </li>
+                        <li *ngIf="content.zero_day">
+                            <div class="cx-label">&nbsp;</div>
+                            <div>Zero Day</div>
+                        </li>
+                        <li *ngIf="content.client_customization">
+                            <div class="cx-label">&nbsp;</div>
+                            <div>Client Customization</div>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row cx-margin-base-top">
+        <span class="cx-label-section">Content Logic</span>
+    </div>
+    <div class="row cx-textarea">{{content.content}}</div>
+
+    <div *ngIf="content.content_source">
+        <div class="row cx-margin-base-top">
+            <span class="cx-label">Content Source</span>
+        </div>
+        <div class="row cx-textarea cx-margin-base-bottom">{{ content.content_source }}</div>
+    </div>
+
+    <div *ngIf="content.sample">
+        <div class="row cx-margin-base-top">
+            <span class="cx-label">Sample</span>
+        </div>
+        <div class="row cx-textarea cx-margin-base-bottom">{{ content.sample }}</div>
+    </div>
+
+    <div *ngIf="content.references">
+        <div class="row cx-margin-base-top">
+            <span class="cx-label">References</span>
+        </div>
+        <div class="row cx-textarea">{{ content.references }}</div>
+    </div>
+    <cnx-content-comments [content]="content" [(commentCount)]="commentCount"></cnx-content-comments>
+</div>
+
+

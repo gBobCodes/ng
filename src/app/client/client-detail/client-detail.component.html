@@ -1,0 +1,52 @@
+<div *ngIf="client">
+    <div *ngIf="!showClientModifyForm" class="cx-w100">
+        <md-card class="cx-card-list">
+            <md-card-content>
+                <table class="cx-w100">
+                    <tr>
+                        <td class="cx-label cx-width-20 cx-input-padding">Name</td>
+                        <td class="cx-label cx-width-20 cx-input-padding">Abbreviation</td>
+                        <td class="cx-label cx-width-20 cx-input-padding">Project Management ID</td>
+                        <td class="cx-label cx-width-20 cx-input-padding">&nbsp;</td>
+                        <td class="cx-width-20 cx-text-align-right" *ngIf="userCanModifyClient">
+                            <md-icon class="cx-icon-edit" (click)="showClientModifyForm=true">mode_edit</md-icon>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cx-input-padding-left">{{ client.name }}</td>
+                        <td class="cx-input-padding-left">{{ client.abbr }}</td>
+                        <td class="cx-input-padding-left">{{ client.pm_id }}</td>
+                        <td class="cx-textrea cx-input-padding-left">
+                            <md-checkbox *ngIf="!showClientModifyForm" [checked]="client.enabled" [disabled]="true" ng-true-value="True" ng-False-value="False" enabled>
+                                <span *ngIf="client.enabled">Enabled</span>
+                                <span *ngIf="!client.enabled">Disabled</span>
+                            </md-checkbox>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div *ngIf="showClientModifyForm">
+        <cnx-client-edit [(client)]="client" [(showClientModifyForm)]="showClientModifyForm"></cnx-client-edit>
+    </div>
+    <span *ngIf="userCanAddAppliance && !showApplianceAddForm">
+        <button md-fab (click)="showApplianceAddForm=true" class="cx-button-appliance-add"><md-icon class="cx-color-black">add</md-icon></button>
+    </span>
+</div>
+
+<div class="cx-sub-header">
+    <div class="cx-sub-header-title">Appliances</div>
+</div>
+
+<div *ngIf="showApplianceAddForm">
+    <cnx-appliance-edit [clientId]="client.id" [(showApplianceModifyForm)]="showApplianceAddForm"></cnx-appliance-edit>
+</div>
+
+<div>
+    <div *ngFor="let appliance of appliances">
+        <cnx-appliance-detail [appliance]="appliance"></cnx-appliance-detail>
+    </div>
+</div>

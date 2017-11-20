@@ -1,0 +1,21 @@
+<div class="cx-w100 cx-nowrap">
+    <md-button-toggle-group #direction="mdButtonToggleGroup" class="cx-margin-large-right">
+        <md-button-toggle
+            *ngFor="let label of content.visible_state_labels"
+            value="{{ label }}"
+            [disabled]="true"
+            [checked]="label == content.status.label">
+            {{ label }}
+        </md-button-toggle>
+    </md-button-toggle-group>
+
+    <md-button-toggle-group #action="mdButtonToggleGroup" class="cx-margin-large-right" style="margin-left: 50px;">
+        <md-button-toggle
+            class="mat-button-toggle-action"
+            *ngFor="let state of content.next_states"
+            value="state.label"
+            (click)="onCheckState(state)">
+            {{ state.label }}
+        </md-button-toggle>
+    </md-button-toggle-group>
+</div>

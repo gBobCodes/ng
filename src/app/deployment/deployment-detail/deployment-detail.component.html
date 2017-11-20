@@ -1,0 +1,32 @@
+<div *ngIf="deployment" class="container-fluid cx-container-form">
+    <div class="row">
+        <alert></alert>
+        <table class="cx-w100">
+            <tr>
+                <td colspan="2" class="cx-w100">
+                    <table class="cx-w100">
+                        <tr>
+                            <td class="cx-w50"><cnx-deployment-workflow [client]="client" [content]="content" [(deployment)]="deployment"></cnx-deployment-workflow></td>
+                            <td class="cx-w50 cx-label">Updated</td>
+                            <td class="cx-input-padding">{{ deployment.last_updated | date: dateFormat}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="cx-w100">
+                    <div class="cx-content-title-view cx-margin-base-top">
+                        <div class="cx-margin-large-top">
+                            <strong *ngIf="client">
+                                Deployment for {{ client.name }} on appliance {{ deployment.appliance.name }}.
+                            </strong>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <cnx-content-comments [content]="deployment" [commentModel]="'deployment'"></cnx-content-comments>
+    </div>
+</div>
+
+

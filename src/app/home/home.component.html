@@ -1,0 +1,29 @@
+<div class="cx-home-header">
+    <div class="cx-home-header-brand">
+        <ul class="cx-header-ul">
+            <li class="cx-header-li raytheon-logo">&nbsp;</li>
+            <li class="cx-header-li cx-header-logo">Content E<b class="cx-logo-accent">x</b>change</li>
+            <li class="cx-header-li cx-header-um">
+                <app-usermenu></app-usermenu>
+            </li>
+        </ul>
+    </div>
+    <div class="cx-home-nav" >
+        <!--start of nav-->
+        <ul class="cx-nav-menu pull-left">
+            <li class="cx-home-nav-item"><a id="dashboard_link"  [routerLink]="['/dashboard']" routerLinkActive="cx-home-nav-link-active" [routerLinkActiveOptions]="{ exact: true }" class="cx-nav-link">My Dashboard</a></li>
+            <li *ngIf="userService.canAdd('Rule')" class="cx-home-nav-item"><a id="add_content_link" [routerLink]="['/content/add']" routerLinkActive="cx-home-nav-link-active" class="cx-nav-link">Add Content</a></li>
+            <li class="cx-home-nav-item"><a id="clients_link"  [routerLink]="['/clients']" routerLinkActive="cx-home-nav-link-active" [routerLinkActiveOptions]="{ exact: true }" class="cx-nav-link">Clients</a></li>
+            <li class="cx-home-nav-item"><a id="search_link" [routerLink]="['/search']" routerLinkActive="cx-home-nav-link-active" [routerLinkActiveOptions]="{ exact: true }" class="cx-nav-link">Search</a></li>
+        </ul>
+        <!--end of nav-->
+
+        <!--start of search-->
+        <app-search></app-search>
+        <!--end of search-->
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="cx-w100 cx-home-content">
+    <router-outlet></router-outlet>
+</div>

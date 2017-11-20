@@ -1,0 +1,16 @@
+<table (click)="onView()" class="cx-clickable-card">
+    <tr>
+        <td class="cx-w100 cx-dash-stage-card-title">{{ content.platform.name }}</td>
+        <td *ngIf='editable' style="white-space: nowrap;vertical-align: top;">
+            <md-icon class="material-icons"  mdTooltip="Edit" mdTooltipPosition="above"  (click)="onEdit()">mode_edit</md-icon>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{ content.title }}
+            <br>
+            <md-icon *ngIf="content.client_customization" mdTooltip="Client Customization Needed" mdTooltipPosition="above" class="cx-color-warn">warning</md-icon>
+            {{ content.last_updated | date: dateFormat }}
+        </td>
+    </tr>
+</table>

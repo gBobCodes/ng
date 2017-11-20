@@ -1,0 +1,19 @@
+<div *ngFor="let client of recall.clients" class="cx-dash-stage">
+    <table class="cx-margin-large-top cx-w100">
+        <tr>
+            <td>
+                <div class="cx-dash-stage-header">
+                    <table>
+                        <tr>
+                            <td class="cx-w100 cx-font-large">{{ client.name }}</td>
+                            <td class="cx-font-xlarge">{{ client.appliances.length }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngFor="let appliance of client.appliances" class="cx-appliance-stage-card">
+                    <cnx-appliance-card [appliance]="appliance" ></cnx-appliance-card>
+                </div> 
+            </td>
+        </tr>
+    </table>
+</div>

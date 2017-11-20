@@ -1,0 +1,64 @@
+<div *ngIf="appliance">
+    <div *ngIf="!showApplianceModifyForm">
+        <md-card class="cx-card-list">
+            <md-card-content>
+                <table class="cx-w100" >
+                    <tr>
+                        <td colspan="2" class="cx-label">Name</td>
+                        <td class="cx-label cx-width-20">Platform</td>
+                        <td class="cx-width-35 cx-label" rowspan="4">
+                            <div class="cx-applicance-counts">
+                                <div class="cx-appliance-counts-item">
+                                    <div class="cx-appliance-counts-item-header">Proposed</div>
+                                    <div class="cx-appliance-counts-item-content">{{ appliance.deployments_proposed_count | number }}</div>
+                                </div>
+                                <div class="cx-appliance-counts-item">
+                                    <div class="cx-appliance-counts-item-header">Exported</div>
+                                    <div class="cx-appliance-counts-item-content">{{ appliance.deployments_exported_count | number }}</div>
+                                </div>
+                                <div class="cx-appliance-counts-item">
+                                    <div class="cx-appliance-counts-item-header">Deployed</div>
+                                    <div class="cx-appliance-counts-item-content">{{ appliance.deployments_deployed_count | number }}</div>
+                                </div>
+                                <div class="cx-appliance-counts-item">
+                                    <div class="cx-appliance-counts-item-header">Recall Needed</div>
+                                    <div class="cx-appliance-counts-item-content">{{ appliance.deployments_recall_needed_count | number }}</div>
+                                </div>
+                                <div class="cx-appliance-counts-item">
+                                    <div class="cx-appliance-counts-item-header">Recalled</div>
+                                    <div class="cx-appliance-counts-item-content">{{ appliance.deployments_recalled_count | number }}</div>
+                                </div>
+                                <div class="cx-appliance-counts-item">
+                                    <div class="cx-appliance-counts-item-header">Declined</div>
+                                    <div class="cx-appliance-counts-item-content">{{ appliance.deployments_declined_count | number }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="cx-width-5 cx-text-align-right cx-vertical-top">
+                            <md-icon *ngIf="userCanModifyAppliance" class="cx-icon-edit" (click)="showApplianceModifyForm=true">mode_edit</md-icon>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ appliance.name }}</td>
+                        <td class="cx-width-20">{{ appliance.platform.name }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="cx-label cx-padding-base-top">Logs</td>
+                        <td class="cx-label cx-padding-base-top">Packets </td>
+                        <td class="cx-label cx-padding-base-top">Custom</td>
+                    </tr>
+                    <tr>
+                        <td class="cx-width-20"><div *ngFor="let log of appliance.logs">{{ log.name }}</div></td>
+                        <td class="cx-width-20"><div *ngFor="let packet of appliance.packets">{{ packet.name }}</div></td>
+                        <td class="cx-width-20"><div *ngFor="let custom of appliance.custom_inputs">{{ custom.name }}</div></td>
+                    </tr>
+                </table>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div *ngIf="showApplianceModifyForm">
+        <cnx-appliance-edit [(appliance)]="appliance" [(showApplianceModifyForm)]="showApplianceModifyForm">
+        </cnx-appliance-edit>
+    </div>
+</div>    

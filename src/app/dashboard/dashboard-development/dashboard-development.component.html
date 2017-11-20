@@ -1,0 +1,19 @@
+<div *ngFor="let key of keys" class="cx-dash-stage">
+    <table class="cx-margin-large-top cx-w100">
+        <tr>
+            <td>
+                <div class="cx-dash-stage-header">
+                    <table>
+                        <tr>
+                            <td class="cx-w100 cx-font-large">{{ key }}</td>
+                            <td class="cx-font-xlarge">{{ develop[key].length }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngFor="let devContent of develop[key];" class="cx-dash-stage-card">
+                    <cnx-content-card [content]="devContent"></cnx-content-card>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

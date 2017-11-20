@@ -1,0 +1,239 @@
+<alert></alert>
+<div class="container-fluid cx-sub-header" *ngIf="errorFree">
+    <div class="cx-sub-header-title">{{ pageTitle }}</div>
+</div>
+<div class="container-fluid cx-container-form" *ngIf="errorFree">
+    <form (ngSubmit)="onSubmit(contentForm)" [formGroup]="contentForm" novalidate>
+        <div class="row">
+            <ul class="cx-content">
+                <li class="cx-width-50">
+                    <md-input-container class="cx-w100">
+                        <input mdInput type="text" placeholder="Title *" formControlName="title" name="title" autofocus>
+                        <md-error class="cx-error-required"></md-error>
+                    </md-input-container>
+                </li>
+                <li class="cx-width-25" *ngIf="modifyMode">
+                    <md-select placeholder="Author" class="cx-select" formControlName="author">
+                        <md-option *ngFor="let person of authors" [value]="person.id">{{ person.first_name }} {{ person.last_name }}</md-option>
+                    </md-select>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <ul class="cx-content">
+                <li class="cx-w100">
+                    <label
+                        *ngIf="contentForm.get('description').touched && contentForm.get('description').invalid"
+                        class="cx-label cx-label-require cx-error">Description</label>
+                    <label
+                        *ngIf="contentForm.get('description').untouched || (contentForm.get('description').touched && contentForm.get('description').valid)"
+                        class="cx-label cx-label-require">Description</label>
+                    <textarea name="description" formControlName="description" class="form-control cx-textarea" rows="2"></textarea>
+                    <div class="cx-error-required-ms cx-top-10" *ngIf="contentForm.get('description').hasError('required') && contentForm.get('description').touched"></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <ul class="cx-content">
+                <li>
+                    <md-select placeholder="Platform *" class="cx-select" formControlName="platform">
+                        <md-option *ngFor="let platform of platforms" [value]="platform.id">{{ platform.name }}</md-option>
+                    </md-select>
+                </li>
+                <li>
+                    <label
+                        *ngIf="contentForm.get('threat_categories').touched && contentForm.get('threat_categories').invalid"
+                        class="cx-label cx-label-small cx-label-require cx-error">Threat Category</label>
+                    <label
+                        *ngIf="contentForm.get('threat_categories').untouched || (contentForm.get('threat_categories').touched && contentForm.get('threat_categories').valid)"
+                        class="cx-label cx-label-small cx-label-require">Threat Category</label>
+                    <ss-multiselect-dropdown
+                        name="categories"
+                        (click)="touch('threat_categories')"
+                        [formControl]="contentForm.controls['threat_categories']"
+                        [options]="threat_categories"
+                        [settings]="dropDownSettings"
+                        [(ngModel)]="selectedCategories">
+                    </ss-multiselect-dropdown>
+                    <div class="cx-error-required-ms" *ngIf="contentForm.get('threat_categories').hasError('required') && contentForm.get('threat_categories').touched"></div>
+                </li>
+                <li>
+                    <md-select placeholder="Threat Actor *" class="cx-select" formControlName="threat_actor">
+                        <md-option *ngFor="let threatActor of threat_actor" [value]="threatActor.id">{{ threatActor.name }}</md-option>
+                    </md-select>
+                </li>
+                <li class="cx-width-25">
+                    <md-input-container class="cx-w100">
+                        <input mdInput type="text" placeholder="Threat Actor Name" formControlName="threat_actor_name" name="title">
+                    </md-input-container>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <ul class="cx-content">
+                <li>
+                    <label class="cx-label cx-label-small cx-label-require">Attack Phase</label>
+                    <ss-multiselect-dropdown
+                        name="attack_phases"
+                        (click)="touch('attack_phases')"
+                        [formControl]="contentForm.controls['attack_phases']"
+                        [options]="attack_phases"
+                        [settings]="dropDownSettings"
+                        [(ngModel)]="selectedAttackPhases">
+                    </ss-multiselect-dropdown>
+                    <div class="cx-error-required-ms" *ngIf="contentForm.get('attack_phases').hasError('required') && contentForm.get('attack_phases').touched"></div>
+                    <!--
+                    <md-select placeholder="Attack Phase *" class="cx-select" formControlName="attack_phases">
+                        <md-option *ngFor="let phase of attack_phases" [value]="phase.id">{{ phase.name }}</md-option>
+                    </md-select>
+                    -->
+                </li>
+                <li>
+                    <md-select placeholder="Protocol *" class="cx-select" formControlName="protocol">
+                        <md-option *ngFor="let protocol of protocols" [value]="protocol.id">{{ protocol.name }}</md-option>
+                    </md-select>
+                </li>
+                <li>
+                    <md-input-container class="cx-w100">
+                        <input mdInput type="text" placeholder="Malware Family" formControlName="malware_family_name" name="malware_family_name">
+                    </md-input-container>
+                </li>
+                <li class="cx-width-25">
+                    <md-input-container class="cx-w100">
+                        <input mdInput type="text" placeholder="Malware Family Variant" formControlName="malware_family_variant" name="malware_family_variant">
+                    </md-input-container>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <ul class="cx-content">
+                <li *ngIf="!dependenciesAreValid" class="cx-content-label-dependencies cx-label-require cx-error">Dependencies</li>
+                <li *ngIf="dependenciesAreValid" class="cx-content-label-dependencies cx-label-require">Dependencies</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <ul class="cx-content">
+                <li>
+                    <label
+                        *ngIf="!dependenciesAreValid"
+                        class="cx-label cx-label-small cx-label-require cx-error">Logs</label>
+                    <label
+                        *ngIf="dependenciesAreValid"
+                        class="cx-label cx-label-small cx-label-require">Logs</label>
+                    <ss-multiselect-dropdown
+                        name="logs"
+                        (click)="touch('logs')"
+                        (focusout)="validateDependencies()"
+                        [formControl]="contentForm.controls['logs']"
+                        [options]="logs"
+                        [settings]="dropDownSettings"
+                        [(ngModel)]="selectedLogs">
+                    </ss-multiselect-dropdown>
+                    <div *ngIf="!dependenciesAreValid" class="cx-error-required-group"></div>
+                </li>
+                <li>
+                    <label
+                        *ngIf="!dependenciesAreValid"
+                        class="cx-label cx-label-small cx-label-require cx-error">Packets</label>
+                    <label
+                        *ngIf="dependenciesAreValid"
+                        class="cx-label cx-label-small cx-label-require">Packets</label>
+                    <ss-multiselect-dropdown
+                        name="packets"
+                        (click)="touch('packets')"
+                        (focusout)="validateDependencies()"
+                        [formControl]="contentForm.controls['packets']"
+                        [options]="packets"
+                        [settings]="dropDownSettings"
+                        [(ngModel)]="selectedPackets">
+                    </ss-multiselect-dropdown>
+                    <div *ngIf="!dependenciesAreValid" class="cx-error-required-group"></div>
+                </li>
+                <li>
+                    <label
+                        *ngIf="!dependenciesAreValid"
+                        class="cx-label cx-label-small cx-label-require cx-error">Custom</label>
+                    <label
+                        *ngIf="dependenciesAreValid"
+                        class="cx-label cx-label-small cx-label-require">Custom</label>
+                    <ss-multiselect-dropdown
+                        name="custom_inputs"
+                        (click)="touch('custom_inputs')"
+                        (focusout)="validateDependencies()"
+                        [formControl]="contentForm.controls['custom_inputs']"
+                        [options]="custom_inputs"
+                        [settings]="dropDownSettings"
+                        [(ngModel)]="selectedCustomInputs">
+                    </ss-multiselect-dropdown>
+                    <div *ngIf="!dependenciesAreValid" class="cx-error-required-group"></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row cx-mt15">
+            <label
+                *ngIf="contentForm.get('content').touched && contentForm.get('content').invalid"
+                class="cx-label cx-label-require cx-error">Content Logic</label>
+            <label
+                *ngIf="contentForm.get('content').untouched || (contentForm.get('content').touched && contentForm.get('content').valid)"
+                class="cx-label cx-label-require">Content Logic</label>
+            <textarea name="content" formControlName="content" class="form-control cx-textarea" rows="8" id="content-textarea" (input)="validateDependencies()"></textarea>
+            <div class="cx-error-required-ms cx-top-10" *ngIf="contentForm.get('content').hasError('required') && contentForm.get('content').touched"></div>
+        </div>
+
+        <div class="row">
+            <label class="cx-label">Content Source</label>
+            <textarea class="form-control cx-textarea" name="content_source" rows="4" formControlName="content_source"></textarea>
+        </div>
+
+        <div class="row">
+            <label class="cx-label">Sample</label>
+            <textarea class="form-control cx-textarea" name="sample" rows="4" formControlName="sample"></textarea>
+        </div>
+
+        <div class="row">
+            <label class="cx-label">Reference</label>
+            <textarea class="form-control cx-textarea" name="references" rows="4" formControlName="references"></textarea>
+        </div>
+
+        <div class="row">
+            <ul class="cx-content">
+                <li>
+                    <md-input-container class="cx-w100">
+                        <input mdInput type="number" placeholder="Expiration Days" formControlName="expiration_days" name="expiration_days">
+                        <md-error>Please enter a value from 7 to 365</md-error>
+                    </md-input-container>
+                </li>
+                <li>
+                    <md-input-container class="cx-w100">
+                        <input mdInput type="text" placeholder="CVE" formControlName="cve" name="cve">
+                    </md-input-container>
+                </li>
+                <li style="padding-top: 15px;">
+                    <md-checkbox formControlName="zero_day" ng-true-value="True" ng-False-value="False">Zero Day</md-checkbox>
+                </li>
+                <li style="padding-top: 15px;">
+                    <md-checkbox formControlName="client_customization" ng-true-value="True" ng-False-value="False">Client Customization</md-checkbox>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row cx-center">
+            <div class="cx-content-alert">
+                <alert></alert>
+            </div>
+            <div class="cx-content-submit">
+                <!--
+                    <button class="btn btn-yellow" [disabled]="contentform.invalid" style="margin-botton: 1%; margin-right: 2%; float: right;">Submit with Template</button>
+                -->
+                <button id="cx-content-btn" class="btn btn-yellow cx-button-submit" [disabled]="contentForm.invalid">Save</button>
+            </div>
+        </div>
+    </form>
+
+</div>

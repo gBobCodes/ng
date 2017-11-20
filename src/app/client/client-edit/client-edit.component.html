@@ -1,0 +1,44 @@
+<div class="cx-w100 ">
+    <alert></alert>
+    <md-card class="cx-card-list">
+        <md-card-content>
+            <form (ngSubmit)="onSave(clientForm)" [formGroup]="clientForm" novalidate class="cx-w100">
+                <table class="cx-w100">
+                    <tr>
+                        <td class="cx-width-20 cx-input-padding">
+                            <md-input-container class="cx-admin-form cx-margin-small-top cx-w100">
+                                <input mdInput placeholder="Name *" id="name" formControlName="name" name="name">
+                            </md-input-container>
+                        </td>
+                        <td class="cx-width-20 cx-input-padding">
+                            <md-input-container class="cx-admin-form cx-margin-small-top cx-w100">
+                                <input mdInput placeholder="Abbreviation *" id="abbr" class="cx-w100" formControlName="abbr" name="abbr">
+                            </md-input-container>
+                        </td>
+                        <td class="cx-width-20 cx-input-padding cx-nowrap">
+                            <md-input-container class="cx-admin-form cx-margin-small-top cx-w100">
+                                <input mdInput placeholder="Project Management ID *" id="pm_id" class="cx-w100" formControlName="pm_id" name="pm_id">
+                            </md-input-container>
+                        </td>
+                        <td class="cx-width-20 cx-input-padding">
+                            <md-checkbox formControlName="enabled" ng-true-value="True" ng-False-value="False" (click)="changeStatus()">
+                                <div>
+                                    <span *ngIf="checkboxEnabled">Enabled</span>
+                                    <span *ngIf="!checkboxEnabled">Disabled</span>
+                                </div>
+                            </md-checkbox>
+                        </td>
+                        <td class="cx-width-20 cx-text-align-right cx-vertical-top">* Required</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="cx-w100"></td>
+                        <td class="cx-text-align-right cx-nowrap">
+                            <button md-button type="button" class="cx-button-cancel cx-margin-base-right" (click)="onCancel()">Cancel</button>
+                            <button md-button class="cx-button-action" [disabled]="clientForm.invalid">Save</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

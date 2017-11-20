@@ -1,0 +1,118 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm)">
+    <div class="">
+        <!--<label class="cx-label"><strong>Content Filter</strong></label>-->
+        <div class="cx-100">
+            <div>
+                <md-input-container class="cx-w100">
+                    <input mdInput placeholder="Search by Text" id="name" class="cx-w100" formControlName="search" id="search" name="search">
+                </md-input-container>
+            </div>
+            <label class="cx-label">Client</label>
+            <ss-multiselect-dropdown
+                name="clients"
+                formControlName="client"
+                [options]="clients | async"
+                [settings]="dropDownSettings">
+            </ss-multiselect-dropdown>
+        </div>
+
+        <div>
+            <div class="cx-label cx-w100 cx-filter-label-margin">Created Date</div>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <md-input-container>
+                                <input mdInput [mdDatepicker]="startDate" placeholder="From" name="startDate" formControlName="created_date_start">
+                                <button mdSuffix [mdDatepickerToggle]="startDate"></button>
+                            </md-input-container>
+                        </td>
+                        <td>
+                            <md-input-container>
+                                <input mdInput [mdDatepicker]="endDate" placeholder="To" name="endDate" formControlName="created_date_end">
+                                <button mdSuffix [mdDatepickerToggle]="endDate"></button>
+                            </md-input-container>
+                        </td>
+                    </tr>
+                </table>
+                <md-datepicker #startDate></md-datepicker>
+                <md-datepicker #endDate></md-datepicker>
+            </div>
+            <div class="cx-w100 cx-text-align-right">
+                <button md-button id="cx-content-btn" class="cx-button-action cx-filter-button-margin">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="cx-filter-options">
+        <label class="cx-label cx-filter-label-margin">State</label>
+        <ss-multiselect-dropdown
+            name="state"
+            formControlName="state"
+            [options]="state"
+            [settings]="dropDownSettings">
+        </ss-multiselect-dropdown>
+        <label class="cx-label cx-filter-label-margin">Protocol</label>
+        <ss-multiselect-dropdown
+            name="protocol"
+            formControlName="protocol"
+            [options]="protocol"
+            [settings]="dropDownSettings">
+        </ss-multiselect-dropdown>
+        <label class="cx-label cx-filter-label-margin">Threat Actor</label>
+        <ss-multiselect-dropdown
+            name="threat_actor"
+            formControlName="threat_actor"
+            [options]="threat_actor"
+            [settings]="dropDownSettings">
+        </ss-multiselect-dropdown>
+        <label class="cx-label cx-filter-label-margin">Threat Category</label>
+        <ss-multiselect-dropdown
+            name="threat_categories"
+            formControlName="threat_categories"
+            [options]="threat_categories"
+            [settings]="dropDownSettings">
+        </ss-multiselect-dropdown>
+        <label class="cx-label cx-filter-label-margin">Attack Phase</label>
+        <ss-multiselect-dropdown
+            name="attack_phases"
+            formControlName="attack_phases"
+            [options]="attack_phases"
+            [settings]="dropDownSettings">
+        </ss-multiselect-dropdown>
+        <label class="cx-label cx-filter-label-margin">Platform</label>
+        <ss-multiselect-dropdown
+            name="platform"
+            formControlName="platform"
+            [options]="platform"
+            [settings]="dropDownSettings">
+        </ss-multiselect-dropdown>
+        <label class="cx-label cx-filter-label-margin"><strong>Dependencies</strong></label>
+        <div class="filter-padding">
+            <label class="cx-label cx-filter-label-margin">Logs</label>
+            <ss-multiselect-dropdown
+                name="logs"
+                formControlName="logs"
+                [options]="logs"
+                [settings]="dropDownSettings">
+            </ss-multiselect-dropdown>
+            <label class="cx-label cx-filter-label-margin">Packets</label>
+            <ss-multiselect-dropdown
+                name="packets"
+                formControlName="packets"
+                [options]="packets"
+                [settings]="dropDownSettings">
+            </ss-multiselect-dropdown>
+            <label class="cx-label cx-filter-label-margin">Custom Inputs</label>
+            <ss-multiselect-dropdown
+                name="custom_inputs"
+                formControlName="custom_inputs"
+                [options]="custom_inputs"
+                [settings]="dropDownSettings">
+            </ss-multiselect-dropdown>
+        </div>
+        <div class="cx-w100 cx-text-align-right">
+            <button id="cx-content-btn" class="btn btn-yellow cx-button-submit">Search</button>
+        </div>
+    </div>
+</form>
+

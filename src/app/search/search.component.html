@@ -1,0 +1,8 @@
+<div class="cx-search-container pull-right">
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm)">
+        <div class="cx-search-form">
+            <input type="text" id="search" formControlName="search" class="cx-search" placeholder="Search content">
+            <i class="fa fa-search cx-search-icon" aria-hidden="true"></i>
+        </div>
+    </form>
+</div>

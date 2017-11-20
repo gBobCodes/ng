@@ -1,0 +1,17 @@
+<div *ngIf='counts'>
+    <p class="cx-label-tab-group">Content</p>
+    <md-tab-group class="cx-w100 cx-dash-menu">
+        <md-tab label="Develop {{ counts.develop }}">
+            <cnx-dashboard-development></cnx-dashboard-development>
+        </md-tab>
+        <md-tab label="Deploy {{ counts.deploy }}">
+            <cnx-dashboard-deploy></cnx-dashboard-deploy>
+        </md-tab>
+        <md-tab label="Recall {{ counts.recall }}">
+            <cnx-dashboard-recall></cnx-dashboard-recall>
+        </md-tab>
+        <md-tab *ngIf='expiredPermissions' label="Expired {{ counts.expired }}">
+            <cnx-dashboard-expired></cnx-dashboard-expired>
+        </md-tab>
+    </md-tab-group>
+</div>

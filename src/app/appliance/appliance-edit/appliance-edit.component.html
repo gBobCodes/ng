@@ -1,0 +1,85 @@
+<div>
+    <alert></alert>
+    <md-card class="cx-card-list">
+        <md-card-header *ngIf="!appliance">Add Appliance</md-card-header>
+        <md-card-content>
+            <form (ngSubmit)="onSave(applianceForm)" [formGroup]="applianceForm" novalidate>
+                <table class="cx-w100">
+                    <tr>
+                        <td colspan="2" class="cx-width-50">
+                            <md-input-container class="cx-input-padding cx-admin-form cx-margin-small-top cx-w100">
+                                <input mdInput placeholder="Name *" id="name" formControlName="name" name="name">
+                            </md-input-container>
+                        </td>
+                        <td class="cx-width-25">
+                            <md-select placeholder="Platform *" class="cx-select cx-w100 cx-appliance-platform-position" formControlName="platform">
+                                <md-option *ngFor="let platform of platforms" [value]="platform.id">{{ platform.name }}</md-option>
+                            </md-select>
+                        </td>
+                        <td class="cx-width-25 cx-text-align-right cx-vertical-top" >* Required</td>
+                    </tr>
+                    <tr>
+                        <td class="cx-width-25">
+                            <label
+                                *ngIf="!dependenciesAreValid"
+                                class="cx-label cx-label-small cx-label-require cx-error">Logs</label>
+                            <label
+                                *ngIf="dependenciesAreValid"
+                                class="cx-label cx-label-small cx-label-require">Logs</label>
+                            <ss-multiselect-dropdown
+                                name="logs"
+                                (click)="touch('logs')"
+                                (focusout)="validateDependencies()"
+                                [formControl]="applianceForm.controls['logs']"
+                                [options]="logs"
+                                [settings]="dropDownSettings"
+                                [(ngModel)]="selectedLogs">
+                            </ss-multiselect-dropdown>
+                            <div *ngIf="!dependenciesAreValid" class="cx-error-required-group"></div>
+                        </td>        
+                        <td class="cx-width-25">
+                            <label
+                                *ngIf="!dependenciesAreValid"
+                                class="cx-label cx-label-small cx-label-require cx-error">Packets</label>
+                            <label
+                                *ngIf="dependenciesAreValid"
+                                class="cx-label cx-label-small cx-label-require">Packets</label>
+                            <ss-multiselect-dropdown
+                                name="packets"
+                                (click)="touch('packets')"
+                                (focusout)="validateDependencies()"
+                                [formControl]="applianceForm.controls['packets']"
+                                [options]="packets"
+                                [settings]="dropDownSettings"
+                                [(ngModel)]="selectedPackets">
+                            </ss-multiselect-dropdown>
+                            <div *ngIf="!dependenciesAreValid" class="cx-error-required-group"></div>
+                        </td>        
+                        <td class="cx-width-25">
+                            <label
+                                *ngIf="!dependenciesAreValid"
+                                class="cx-label cx-label-small cx-label-require cx-error">Custom</label>
+                            <label
+                                *ngIf="dependenciesAreValid"
+                                class="cx-label cx-label-small cx-label-require">Custom</label>
+                            <ss-multiselect-dropdown
+                                name="custom_inputs"
+                                (click)="touch('custom_inputs')"
+                                (focusout)="validateDependencies()"
+                                [formControl]="applianceForm.controls['custom_inputs']"
+                                [options]="custom_inputs"
+                                [settings]="dropDownSettings"
+                                [(ngModel)]="selectedCustomInputs">
+                            </ss-multiselect-dropdown>
+                            <div *ngIf="!dependenciesAreValid" class="cx-error-required-group"></div>
+                        </td>
+                        <td class="cx-width-25 cx-text-align-right cx-nowrap">
+                            <button md-button type="button" class="cx-button-cancel cx-margin-base-right" (click)="onCancel()">Cancel</button>
+                            <button md-button class="cx-button-action" [disabled]="applianceForm.invalid">Save</button>
+                        </td> 
+                    </tr>
+                </table>       
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

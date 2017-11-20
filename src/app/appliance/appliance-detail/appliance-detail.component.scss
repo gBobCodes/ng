@@ -1,0 +1,35 @@
+@import '../../../assets/css/modules/colors';
+@import '../../../assets/css/modules/fonts';
+@import '../../../assets/css/modules/margins';
+
+.cx-applicance-counts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.cx-appliance-counts-item {
+    background-color: $color-input-background;
+    border: 1px dotted $color-primary-border;
+    margin: 0 $margin-small $margin-small 0;
+    padding: $margin-small;
+    width: 32.25%;
+    text-align: center;
+}
+
+.cx-appliance-counts-item-content {
+    color: $color-primary;
+    font-size: $font-size-xlarge;
+    font-weight: 400;
+    margin: 0 0 $margin-small 0;
+    padding: 0;
+    text-align: center;
+}
+
+.cx-appliance-counts-item-header {
+    color: $font-color-label;
+    font-size: $font-size-small;
+    margin: 0;
+    padding: 0;
+}

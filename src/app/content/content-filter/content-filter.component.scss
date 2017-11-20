@@ -1,0 +1,46 @@
+@import '../../../assets/css/modules/colors';
+@import '../../../assets/css/modules/margins';
+
+.cx-filter-button-margin {
+    margin-top: -10px;
+}
+
+.cx-filter-label-margin {
+    margin-top: $margin-xlarge;
+}
+
+.cx-filter-options {
+    border-top: 1px solid rgba(0,0,0,.1);
+    margin-top: 5%;
+}
+
+.cx-search {
+    background-color: $color-primary-border;
+    padding-left: 5px;
+    width: 100%
+}
+.filter-container-width {
+    width: 90%;
+}
+.filter-padding {
+    padding-left: 15px;
+}
+
+.mat-input-element {
+    width: 100px;
+}
+
+.mat-input-container {
+    padding-right: 10px;
+}
+
+.cx-button-submit {
+    float: none;
+}
+
+hr {
+    background-color: $color-primary-border;
+    height: 2px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
